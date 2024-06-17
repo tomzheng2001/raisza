@@ -4,10 +4,17 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { MTLLoader } from 'three/examples/jsm/Addons.js';
 import { OBJLoader } from 'three/examples/jsm/Addons.js';
+import { Object3D } from 'three';
 
-const Model = ({ objUrl, mtlUrl, cursorPosition }) => {
-    const objRef = useRef();
-    const [model, setModel] = useState();
+interface ModelProps {
+    objUrl: string;
+    mtlUrl: string;
+    cursorPosition: { x: number; y: number } | null;
+}
+
+const Model: React.FC<ModelProps> = ({ objUrl, mtlUrl, cursorPosition }) => {
+    const objRef = useRef<Object3D>();
+    const [model, setModel] = useState<Object3D | null>(null);
 
     useEffect(() => {
         const mtlLoader = new MTLLoader();
@@ -33,10 +40,13 @@ const Model = ({ objUrl, mtlUrl, cursorPosition }) => {
     return model ? <primitive ref={objRef} object={model} scale={0.6} /> : null;
 };
 
-const Mask = () => {
-    const [cursorPosition, setCursorPosition] = useState(null);
+const Mask: React.FC = () => {
+    const [cursorPosition, setCursorPosition] = useState<{
+        x: number;
+        y: number;
+    } | null>(null);
 
-    const handleMouseMove = event => {
+    const handleMouseMove = (event: MouseEvent) => {
         const { clientX, clientY } = event;
         const x = (clientX / window.innerWidth) * 2 - 1;
         const y = -(clientY / window.innerHeight) * 2 + 1;

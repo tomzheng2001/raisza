@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 
-const LoadingScreen = () => {
-    const [width, setWidth] = useState(window.innerWidth);
-    const [height, setHeight] = useState(window.innerHeight);
+const LoadingScreen: React.FC = () => {
+    const [width, setWidth] = useState<number>(0);
+    const [height, setHeight] = useState<number>(0);
 
     useEffect(() => {
-        const handleResize = () => {
+        const updateDimensions = () => {
             setWidth(window.innerWidth);
             setHeight(window.innerHeight);
         };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+
+        if (typeof window !== 'undefined') {
+            updateDimensions();
+            window.addEventListener('resize', updateDimensions);
+        }
+
+        return () => {
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('resize', updateDimensions);
+            }
+        };
     }, []);
 
     return (
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white z-50">
-            <Confetti width={width} height={height} />
+            {width && height && <Confetti width={width} height={height} />}
             <h1 className="text-3xl md:text-5xl font-bold animate-pulse">
                 Happy 9 Month Anniversary Baby!
             </h1>

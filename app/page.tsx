@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 import Image from 'next/image';
 import Mask from './_components/Mask';
@@ -72,7 +73,7 @@ export default function Home() {
                     <div className="flex flex-col items-center max-h-full max-w-2 mx-4 md:ml-8 mb-8">
                         <Mask />
                     </div>
-                    <div className="flex flex-col items-center max-w-md mx-4 md:ml-8 md:mr-8">
+                    <div className="flex flex-col items-center h-full max-w-md mx-4 md:ml-8 md:mr-8">
                         <Image
                             src="/girl-photo.jpg"
                             width={200}
