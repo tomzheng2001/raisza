@@ -10,7 +10,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-darkest-blue fixed w-full flex justify-between items-center px-8 py-4 shadow-md z-50">
+        <nav className="bg-darkest-blue fixed w-full flex justify-between items-center px-8 py-4 shadow-md z-20">
             <div className="flex items-center">
                 <Image width={50} height={50} src="/rlogo.png" alt="logo" />
             </div>

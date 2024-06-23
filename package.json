@@ -8,7 +8,7 @@
         "export": "next export",
         "start": "next start",
         "lint": "next lint",
-        "deploy": "npm run build && gh-pages -d out"
+        "deploy": "gh-pages -d out --nojekyll --cname www.raisza.com"
     },
     "dependencies": {
         "@react-three/drei": "^9.107.0",
@@ -18,7 +18,8 @@
         "react-confetti": "^6.1.0",
         "react-dom": "^18",
         "three": "^0.165.0",
-        "vanta": "^0.5.24"
+        "vanta": "^0.5.24",
+        "vercel": "^34.2.7"
     },
     "devDependencies": {
         "@types/node": "^20",

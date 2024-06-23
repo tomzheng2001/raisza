@@ -40,7 +40,7 @@ const Model: React.FC<ModelProps> = ({ objUrl, mtlUrl, cursorPosition }) => {
     return model ? <primitive ref={objRef} object={model} scale={0.6} /> : null;
 };
 
-const Mask: React.FC = () => {
+const Sword: React.FC = () => {
     const [cursorPosition, setCursorPosition] = useState<{
         x: number;
         y: number;
@@ -63,7 +63,7 @@ const Mask: React.FC = () => {
     return (
         <Canvas
             camera={{ position: [5, -5, 20], fov: 125 }}
-            style={{ height: '80vh', width: '50vw' }}
+            style={{ height: '100vh', width: '50vw' }}
         >
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} />
@@ -79,4 +79,4 @@ const Mask: React.FC = () => {
     );
 };
 
-export default Mask;
+export default Sword;
