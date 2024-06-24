@@ -1,13 +1,76 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import Image from 'next/image';
 import SocialMediaIcons from './_components/SocialMediaIcons';
 import Navbar from './_components/Navbar';
-import { useEffect, useState } from 'react';
 import LoadingScreen from './_components/LoadingScreen';
 import Sword from './_components/Sword';
 import SlidingWords from './_components/SlidingWords';
 import ProfileImage from './_components/ProfileImage';
+
+const Gallery = lazy(() => import('./_components/Gallery'));
+
+const images = [
+    // Front
+    {
+        position: [0, 0, 1.5],
+        rotation: [0, 0, 0],
+        url: 'img1.jpg',
+        msg: 'Catalina Island-California-USA',
+    },
+    // Back
+    {
+        position: [-0.8, 0, -0.6],
+        rotation: [0, 0, 0],
+        url: 'img2.jpg',
+        msg: 'Berkeley-California-USA',
+    },
+    {
+        position: [0.8, 0, -0.6],
+        rotation: [0, 0, 0],
+        url: 'img3.jpg',
+        msg: 'Berkeley-California-USA',
+    },
+    // Left
+    {
+        position: [-1.75, 0, 0.25],
+        rotation: [0, Math.PI / 2.5, 0],
+        url: 'img4.jpg',
+        msg: 'Lima-Peru',
+    },
+    {
+        position: [-2.15, 0, 1.5],
+        rotation: [0, Math.PI / 2.5, 0],
+        url: 'img5.jpg',
+        msg: 'Atlanta-Georgia-USA',
+    },
+    {
+        position: [-2, 0, 2.75],
+        rotation: [0, Math.PI / 2.5, 0],
+        url: 'img6.jpg',
+        msg: 'Huacachina-Peru',
+    },
+    // Right
+    {
+        position: [1.75, 0, 0.25],
+        rotation: [0, -Math.PI / 2.5, 0],
+        url: 'img7.jpg',
+        msg: 'Berkeley-California-USA',
+    },
+    {
+        position: [2.15, 0, 1.5],
+        rotation: [0, -Math.PI / 2.5, 0],
+        url: 'img8.jpg',
+        msg: 'Huacachina-Peru',
+    },
+    {
+        position: [2, 0, 2.75],
+        rotation: [0, -Math.PI / 2.5, 0],
+        url: 'img9.jpg',
+        msg: 'Fairfield-California-USA',
+    },
+];
 
 export default function Home() {
     useEffect(() => {
@@ -34,20 +97,19 @@ export default function Home() {
 
     return (
         <>
-            <div id="hero" className="min-h-screen flex flex-col">
+            <div id="hero" className={`min-h-screen flex flex-col`}>
                 {/* Navbar */}
                 <Navbar />
                 {/* Main Section */}
                 <main
                     id="home"
-                    className="bg-lightest-blue flex flex-col h-screen w-screen justify-center items-center py-24"
+                    className="bg-lightest-blue h-screen w-screen justify-center items-center py-24 px-36"
                 >
                     <div className="flex flex-col md:flex-row h-full w-full justify-around items-center px-4 md:px-8 py-24">
                         <div className="flex flex-col h-full justify-around max-w-md mx-4 md:ml-8">
                             <div className="flex flex-col h-full w-full justify-around items-left">
-                                <div />
                                 <div className="text-left p-4 space-y-4">
-                                    <h1 className="text-3xl md:text-6xl font-sans font-bold text-gray-800">
+                                    <h1 className="text-4xl md:text-6xl font-sans font-bold text-gray-800">
                                         Raisza Lucho
                                     </h1>
                                     <SlidingWords />
@@ -61,11 +123,9 @@ export default function Home() {
                                         </span>
                                     </button>
                                 </a>
+                                <div />
                             </div>
                         </div>
-                        {/* <div className="flex flex-col items-center max-h-full max-w-2 mx-4 md:ml-8 mb-8">
-                            <Sword />
-                        </div> */}
                         <ProfileImage />
                     </div>
                 </main>
@@ -87,15 +147,9 @@ export default function Home() {
                     id="gallery"
                     className="h-screen w-screen flex justify-center items-center bg-green-100"
                 >
-                    <div className="text-center p-8">
-                        <h2 className="text-3xl md:text-5xl font-bold text-gray-800">
-                            Gallery
-                        </h2>
-                        <p className="text-lg md:text-xl text-gray-600 mt-4">
-                            A collection of images and moments from Raisza's
-                            life and career.
-                        </p>
-                    </div>
+                    <Suspense fallback={<LoadingScreen />}>
+                        <Gallery images={images} />
+                    </Suspense>
                 </section>
 
                 {/* Contact Section */}

@@ -3,11 +3,10 @@ import Image from 'next/image'; // Assuming you're using Next.js
 
 const ProfileImage = () => {
     return (
-        <div className="relative group w-1/3 h-full">
+        <div className="hidden sm:block relative group w-96 h-96">
             <Image
                 src="/girl-photo.jpg"
-                width={200}
-                height={200}
+                layout="fill"
                 alt="Fencer's Photo"
                 className="w-full h-full object-cover rounded-full mb-4 shadow-lg"
             />

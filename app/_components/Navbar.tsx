@@ -35,12 +35,6 @@ const Navbar = () => {
                         Gallery
                     </a>
                     <a
-                        href="#achievements"
-                        className="nav-link font-sans font-semibold"
-                    >
-                        Achievements
-                    </a>
-                    <a
                         href="#contact"
                         className="nav-link font-sans font-semibold"
                     >
